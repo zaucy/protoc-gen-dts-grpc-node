@@ -1,12 +1,12 @@
 steps:
 
 - script: choco install bazel || exit 0
-  workingDirectory: $(Build.SourcesDirectory)/packages/protoc-gen-dts-grpc-node
+  workingDirectory: $(Build.SourcesDirectory)
 
-- script: bazel build javascript/net/grpc/web:protoc-gen-dts-grpc-node -c opt && copy .\bazel-out\x64_windows-opt\bin\javascript\net\grpc\web\protoc-gen-dts-grpc-node.exe .\packages\protoc-gen-dts-grpc-node\bin\protoc-gen-dts-grpc-node-win32.exe
+- script: bazel build :protoc-gen-dts-grpc-node -c opt && copy .\bazel-out\x64_windows-opt\bin\protoc-gen-dts-grpc-node.exe .\bin\protoc-gen-dts-grpc-node-win32.exe
   workingDirectory: $(Build.SourcesDirectory)
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: $(Build.SourcesDirectory)/packages/protoc-gen-dts-grpc-node/bin/protoc-gen-dts-grpc-node-win32.exe
+    pathtoPublish: $(Build.SourcesDirectory)/protoc-gen-dts-grpc-node/bin/protoc-gen-dts-grpc-node-win32.exe
     artifactName: protoc-gen-dts-grpc-node-win32
