@@ -8,5 +8,5 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: $(Build.SourcesDirectory)/protoc-gen-dts-grpc-node/bin/protoc-gen-dts-grpc-node-win32.exe
+    pathtoPublish: $(Build.SourcesDirectory)/bin/protoc-gen-dts-grpc-node-win32.exe
     artifactName: protoc-gen-dts-grpc-node-win32

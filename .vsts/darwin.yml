@@ -13,5 +13,5 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: $(Build.SourcesDirectory)/protoc-gen-dts-grpc-node/bin/protoc-gen-dts-grpc-node-darwin
+    pathtoPublish: $(Build.SourcesDirectory)/bin/protoc-gen-dts-grpc-node-darwin
     artifactName: protoc-gen-dts-grpc-node-darwin 
