@@ -70,9 +70,9 @@ bool DtsGrpcNodeGenerator::PrintServiceImplementationInterface
     auto inputType = method->input_type();
     auto outputType = method->output_type();
 
-    vars.insert_or_assign("MethodName", firstCharToLower(method->name()));
-    vars.insert_or_assign("RequestName", inputType->full_name());
-    vars.insert_or_assign("ResponseName", outputType->full_name());
+    vars.insert({"MethodName", firstCharToLower(method->name())});
+    vars.insert({"RequestName", inputType->full_name()});
+    vars.insert({"ResponseName", outputType->full_name()});
     
     if(method->client_streaming() && method->server_streaming()) {
       printer.Print(vars, "$MethodName$: grpc.handleBidiStreamingCall<$RequestName$, $ResponseName$>;\n");
@@ -114,9 +114,9 @@ bool DtsGrpcNodeGenerator::PrintServiceDefinitionInterface
     auto inputType = method->input_type();
     auto outputType = method->output_type();
 
-    vars.insert_or_assign("MethodName", firstCharToLower(method->name()));
-    vars.insert_or_assign("RequestName", inputType->full_name());
-    vars.insert_or_assign("ResponseName", outputType->full_name());
+    vars.insert({"MethodName", firstCharToLower(method->name())});
+    vars.insert({"RequestName", inputType->full_name()});
+    vars.insert({"ResponseName", outputType->full_name()});
     
     printer.Print(vars, "$MethodName$: grpc.MethodDefinition<$RequestName$, $ResponseName$>;\n");
   }
@@ -150,9 +150,9 @@ bool DtsGrpcNodeGenerator::PrintServiceClientClass
     auto inputType = method->input_type();
     auto outputType = method->output_type();
 
-    vars.insert_or_assign("MethodName", firstCharToLower(method->name()));
-    vars.insert_or_assign("RequestName", inputType->full_name());
-    vars.insert_or_assign("ResponseName", outputType->full_name());
+    vars.insert({"MethodName", firstCharToLower(method->name())});
+    vars.insert({"RequestName", inputType->full_name()});
+    vars.insert({"ResponseName", outputType->full_name()});
     
     if(method->client_streaming() && method->server_streaming()) {
 
@@ -239,13 +239,13 @@ bool DtsGrpcNodeGenerator::GenerateImports
 
   for(auto pair : descriptors) {
     auto path = pair.first;
-    vars.insert_or_assign("ImportPath", "./" + path + "_pb");
+    vars.insert({"ImportPath", "./" + path + "_pb"});
 
     printer.Print(vars, "import {\n");
     printer.Indent();
 
     for(auto descriptor : pair.second) {
-      vars.insert_or_assign("ImportName", descriptor->name());
+      vars.insert({"ImportName", descriptor->name()});
       printer.Print(vars, "$ImportName$,\n");
     }
 
