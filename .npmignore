@@ -1,0 +1,9 @@
+/.vscode
+/bazel-*
+/bin/*
+!/bin/.gitkeep
+
+/BUILD
+/WORKSPACE
+/.gitignore
+/.vsts

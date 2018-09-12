@@ -1,0 +1,18 @@
+steps:
+
+- script: sudo apt-get install -y pkg-config zip g++ zlib1g-dev unzip python
+  workingDirectory: $(Build.SourcesDirectory)/packages/protoc-gen-dts-grpc-node
+
+- script: curl -L -o bazel-installer.sh https://github.com/bazelbuild/bazel/releases/download/0.16.1/bazel-0.16.1-installer-linux-x86_64.sh
+  workingDirectory: $(Build.SourcesDirectory)/packages/protoc-gen-dts-grpc-node
+
+- script: chmod +x ./bazel-installer.sh && ./bazel-installer.sh --user
+  workingDirectory: $(Build.SourcesDirectory)/packages/protoc-gen-dts-grpc-node
+
+- script: $HOME/bin/bazel build javascript/net/grpc/web:protoc-gen-dts-grpc-node --linkopt=-static -c opt && cp ./bazel-out/k8-opt/bin/javascript/net/grpc/web/protoc-gen-dts-grpc-node ./packages/protoc-gen-dts-grpc-node/bin/protoc-gen-dts-grpc-node-linux
+  workingDirectory: $(Build.SourcesDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.SourcesDirectory)/packages/protoc-gen-dts-grpc-node/bin/protoc-gen-dts-grpc-node-linux
+    artifactName: protoc-gen-dts-grpc-node-linux
