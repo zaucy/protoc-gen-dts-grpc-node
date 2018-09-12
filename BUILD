@@ -1,7 +1,6 @@
 cc_binary(
   name = "protoc-gen-dts-grpc-node",
   linkstatic = True,
-  linkopts = ["-static"],
   srcs = [
     "src/generator.cc",
     "src/dts-grpc-node-generator-options.cc",
