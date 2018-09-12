@@ -18,7 +18,7 @@ async function start() {
   const {version} = await fs.readJson(packageJsonPath);
   const execFilename = 'protoc-gen-dts-grpc-node-' + process.platform + EXT;
 
-  const downloadUrl = DL_PREFIX + VERSION_PREFIX + version + '/' + execFilename;
+  const downloadUrl = DL_PREFIX + VERSION_PREFIX + 'v' + version + '/' + execFilename;
 
   console.log("Downloading", downloadUrl);
   const buffer = await download(downloadUrl).catch(err => {
