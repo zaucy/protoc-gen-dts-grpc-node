@@ -239,6 +239,12 @@ bool DtsGrpcNodeGenerator::GenerateImports
 
   for(auto pair : descriptors) {
     auto path = pair.first;
+    auto lastSlashIndex = path.find_last_of('/');
+    
+    if(lastSlashIndex != std::string::npos) {
+      path = path.substr(lastSlashIndex + 1);
+    }
+
     vars["ImportPath"] = "./" + path + "_pb";
 
     printer.Print(vars, "import {\n");
