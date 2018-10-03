@@ -71,8 +71,8 @@ bool DtsGrpcNodeGenerator::PrintServiceImplementationInterface
     auto outputType = method->output_type();
 
     vars["MethodName"] = firstCharToLower(method->name());
-    vars["RequestName"] = inputType->full_name();
-    vars["ResponseName"] = outputType->full_name();
+    vars["RequestName"] = inputType->name();
+    vars["ResponseName"] = outputType->name();
     
     if(method->client_streaming() && method->server_streaming()) {
       printer.Print(vars, "$MethodName$: grpc.handleBidiStreamingCall<$RequestName$, $ResponseName$>;\n");
@@ -115,8 +115,8 @@ bool DtsGrpcNodeGenerator::PrintServiceDefinitionInterface
     auto outputType = method->output_type();
 
     vars["MethodName"] = firstCharToLower(method->name());
-    vars["RequestName"] = inputType->full_name();
-    vars["ResponseName"] = outputType->full_name();
+    vars["RequestName"] = inputType->name();
+    vars["ResponseName"] = outputType->name();
     
     printer.Print(vars, "$MethodName$: grpc.MethodDefinition<$RequestName$, $ResponseName$>;\n");
   }
@@ -151,8 +151,8 @@ bool DtsGrpcNodeGenerator::PrintServiceClientClass
     auto outputType = method->output_type();
 
     vars["MethodName"] = firstCharToLower(method->name());
-    vars["RequestName"] = inputType->full_name();
-    vars["ResponseName"] = outputType->full_name();
+    vars["RequestName"] = inputType->name();
+    vars["ResponseName"] = outputType->name();
     
     if(method->client_streaming() && method->server_streaming()) {
 
