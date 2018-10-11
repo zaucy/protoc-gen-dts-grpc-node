@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-dts-grpc-node",
-  "version": "1.6.9-0",
+  "version": "1.6.9-1",
   "author": "Ezekiel Warren",
   "description": "",
   "main": "index.js",
