@@ -6,6 +6,9 @@ steps:
 - script: bazel build :protoc-gen-dts-grpc-node -c opt && copy .\bazel-out\x64_windows-opt\bin\protoc-gen-dts-grpc-node.exe .\bin\protoc-gen-dts-grpc-node-win32.exe
   workingDirectory: $(Build.SourcesDirectory)
 
+# Basic test
+- script: .\bin\protoc-gen-dts-grpc-node-win32.exe
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(Build.SourcesDirectory)/bin/protoc-gen-dts-grpc-node-win32.exe

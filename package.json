@@ -13,13 +13,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zaucy/grpc-web.git"
+    "url": "git+https://github.com/zaucy/protoc-gen-dts-grpc-node.git"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/zaucy/grpc-web/issues"
+    "url": "https://github.com/zaucy/protoc-gen-dts-grpc-node/issues"
   },
-  "homepage": "https://github.com/zaucy/grpc-web#readme",
+  "homepage": "https://github.com/zaucy/protoc-gen-dts-grpc-node#readme",
   "dependencies": {
     "download": "^7.1.0",
     "fs-extra": "^7.0.0"

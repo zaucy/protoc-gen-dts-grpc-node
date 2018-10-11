@@ -11,6 +11,9 @@ steps:
 - script: bazel build :protoc-gen-dts-grpc-node -c opt && cp ./bazel-out/darwin-opt/bin/protoc-gen-dts-grpc-node ./bin/protoc-gen-dts-grpc-node-darwin
   workingDirectory: $(Build.SourcesDirectory)
 
+# Basic test
+- script: ./bin/protoc-gen-dts-grpc-node-darwin --dummy-option
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(Build.SourcesDirectory)/bin/protoc-gen-dts-grpc-node-darwin

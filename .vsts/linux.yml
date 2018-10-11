@@ -12,6 +12,9 @@ steps:
 - script: $HOME/bin/bazel build :protoc-gen-dts-grpc-node --linkopt=-static -c opt && cp ./bazel-out/k8-opt/bin/protoc-gen-dts-grpc-node ./bin/protoc-gen-dts-grpc-node-linux
   workingDirectory: $(Build.SourcesDirectory)
 
+# Basic test
+- script: ./bin/protoc-gen-dts-grpc-node-linux --dummy-option
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(Build.SourcesDirectory)/bin/protoc-gen-dts-grpc-node-linux
