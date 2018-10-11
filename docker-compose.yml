@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  # win32:
+  #   image: protoc-gen-angular-win32
+  #   build:
+  #     context: ./
+  #     dockerfile: win32.Dockerfile
+  #   volumes:
+  #     - type: bind
+  #       source: ./release
+  #       target: C:/protoc-gen-angular/release
+  #       volume:
+  #         nocopy: true
+
+  linux:
+    image: protoc-gen-dts-grpc-node-linux
+    build:
+      context: ./
+      dockerfile: linux.Dockerfile
+    volumes:
+      - /protoc-gen-dts-grpc-node/node_modules
+      - /protoc-gen-dts-grpc-node/.vsts
+      - /protoc-gen-dts-grpc-node/.vscode
+      - /protoc-gen-dts-grpc-node/bin
+      - type: bind
+        source: ./
+        target: /protoc-gen-dts-grpc-node
+        volume:
+          nocopy: true
