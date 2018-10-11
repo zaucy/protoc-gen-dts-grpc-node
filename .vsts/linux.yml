@@ -9,7 +9,7 @@ steps:
 - script: chmod +x ./bazel-installer.sh && ./bazel-installer.sh --user
   workingDirectory: $(Build.SourcesDirectory)
 
-- script: $HOME/bin/bazel build :protoc-gen-dts-grpc-node -c opt && cp ./bazel-out/k8-opt/bin/protoc-gen-dts-grpc-node ./bin/protoc-gen-dts-grpc-node-linux
+- script: $HOME/bin/bazel build :protoc-gen-dts-grpc-node --linkopt=-static-libstdc++ -c opt && cp ./bazel-out/k8-opt/bin/protoc-gen-dts-grpc-node ./bin/protoc-gen-dts-grpc-node-linux
   workingDirectory: $(Build.SourcesDirectory)
 
 # Basic test
