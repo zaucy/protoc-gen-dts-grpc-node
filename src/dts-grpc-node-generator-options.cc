@@ -10,15 +10,15 @@ DtsGrpcNodeGeneratorOptions::DtsGrpcNodeGeneratorOptions
   ( const std::string& parameter
   )
 {
-  std::vector<std::pair<std::string, std::string>> options;
-  ParseGeneratorParameter(parameter, &options);
+  // std::vector<std::pair<std::string, std::string>> options;
+  // ParseGeneratorParameter(parameter, &options);
 
-  for(const auto& option : options) {
-    const std::string& optKey = option.first;
-    const std::string& optValue = option.second;
+  // for(const auto& option : options) {
+  //   const std::string& optKey = option.first;
+  //   const std::string& optValue = option.second;
 
-    // @TODO: Add parameter parsing
-  }
+  //   // @TODO: Add parameter parsing
+  // }
 }
 
 bool DtsGrpcNodeGeneratorOptions::hasError
