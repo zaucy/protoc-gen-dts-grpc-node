@@ -35,6 +35,13 @@ public:
     , std::string*                                error
     ) const;
 
+  bool PrintServicePromiseClientInterface
+    ( google::protobuf::io::Printer&              printer
+    , const DtsGrpcNodeGeneratorOptions&          options
+    , const google::protobuf::ServiceDescriptor*  service
+    , std::string*                                error
+    ) const;
+
   bool GenerateImports
     ( google::protobuf::io::Printer&           printer
     , const DtsGrpcNodeGeneratorOptions&       options

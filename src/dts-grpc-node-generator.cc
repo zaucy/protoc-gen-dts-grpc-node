@@ -129,6 +129,69 @@ bool DtsGrpcNodeGenerator::PrintServiceDefinitionInterface
   return true;
 }
 
+bool DtsGrpcNodeGenerator::PrintServicePromiseClientInterface
+  ( google::protobuf::io::Printer&              printer
+  , const DtsGrpcNodeGeneratorOptions&          options
+  , const google::protobuf::ServiceDescriptor*  service
+  , std::string*                                error
+  ) const
+{
+  std::map<std::string, std::string> vars = {
+    {"ServiceName", service->name()}
+  };
+
+  printer.Print(vars, "export interface I$ServiceName$PromiseClient {\n");
+  printer.Indent();
+
+  auto methodCount = service->method_count();
+
+  for(auto i=0; methodCount > i; ++i) {
+    auto method = service->method(i);
+    auto inputType = method->input_type();
+    auto outputType = method->output_type();
+
+    vars["MethodName"] = firstCharToLower(method->name());
+    vars["RequestName"] = inputType->name();
+    vars["ResponseName"] = outputType->name();
+    
+    if(method->client_streaming() && method->server_streaming()) {
+
+    } else
+    if(method->client_streaming()) {
+
+    } else
+    if(method->server_streaming()) {
+
+    } else {
+      printer.Print(vars, "$MethodName$\n");
+      printer.Indent();
+      printer.Print(vars, "( request: $RequestName$\n");
+      printer.Print(vars, "): Promise<$ResponseName$>;\n");
+      printer.Outdent();
+
+      printer.Print(vars, "$MethodName$\n");
+      printer.Indent();
+      printer.Print(vars, "( request: $RequestName$\n");
+      printer.Print(vars, ", metadata: grpc.Metadata | null\n");
+      printer.Print(vars, "): Promise<$ResponseName$>;\n");
+      printer.Outdent();
+
+      printer.Print(vars, "$MethodName$\n");
+      printer.Indent();
+      printer.Print(vars, "( request: $RequestName$\n");
+      printer.Print(vars, ", metadata: grpc.Metadata | null\n");
+      printer.Print(vars, ", options: grpc.CallOptions | null\n");
+      printer.Print(vars, "): Promise<$ResponseName$>;\n\n");
+      printer.Outdent();
+    }
+  }
+
+  printer.Outdent();
+  printer.Print(vars, "}\n\n");
+
+  return true;
+}
+
 bool DtsGrpcNodeGenerator::PrintServiceClientClass
   ( google::protobuf::io::Printer&              printer
   , const DtsGrpcNodeGeneratorOptions&          options
@@ -298,6 +361,10 @@ bool DtsGrpcNodeGenerator::Generate
     }
 
     if(!PrintServiceClientClass(printer, options, service, error)) {
+      return false;
+    }
+
+    if(!PrintServicePromiseClientInterface(printer, options, service, error)) {
       return false;
     }
   }
